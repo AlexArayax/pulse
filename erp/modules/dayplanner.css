@@ -1,0 +1,302 @@
+.erp-dayplanner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    color: var(--text);
+    background: var(--background);
+}
+
+.erp-dayplanner .dayplanner-toolbar {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    padding:
+        max(8px, env(safe-area-inset-top))
+        max(10px, env(safe-area-inset-right))
+        8px
+        max(10px, env(safe-area-inset-left));
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.erp-dayplanner .dayplanner-date-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.erp-dayplanner .dayplanner-date {
+    min-width: 150px;
+    min-height: 40px;
+    max-width: 100%;
+    padding: 7px 34px 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    color: var(--text);
+    background: var(--surface);
+    font: inherit;
+    font-size: 16px;
+}
+
+.erp-dayplanner .dayplanner-sync-status {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.3;
+    text-align: right;
+    text-overflow: ellipsis;
+}
+
+.erp-dayplanner .dayplanner-sync-status[data-type="success"] {
+    color: var(--success);
+}
+
+.erp-dayplanner .dayplanner-sync-status[data-type="pending"] {
+    color: var(--muted);
+}
+
+.erp-dayplanner .dayplanner-content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.erp-dayplanner .dayplanner-loading,
+.erp-dayplanner .dayplanner-error {
+    margin: 10px;
+}
+
+.erp-dayplanner .dayplanner-view {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    padding:
+        10px
+        max(10px, env(safe-area-inset-right))
+        14px
+        max(10px, env(safe-area-inset-left));
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+.erp-dayplanner .dayplanner-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.erp-dayplanner .dayplanner-card {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 30px;
+    align-items: center;
+    min-height: 48px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: var(--surface);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+    cursor: pointer;
+    user-select: none;
+}
+
+.erp-dayplanner .dayplanner-card:active {
+    background: color-mix(
+        in srgb,
+        var(--surface) 92%,
+        var(--primary)
+    );
+}
+
+.erp-dayplanner .dayplanner-card-done {
+    opacity: 0.68;
+}
+
+.erp-dayplanner .dayplanner-card-done
+.dayplanner-card-text {
+    text-decoration: line-through;
+}
+
+.erp-dayplanner .dayplanner-card-dragging {
+    z-index: 3;
+    border-color: var(--primary);
+    opacity: 0.85;
+    box-shadow: 0 6px 18px rgb(0 0 0 / 18%);
+}
+
+.erp-dayplanner .dayplanner-drag-handle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    width: 40px;
+    min-height: 46px;
+    padding: 0;
+    border: 0;
+    border-right: 1px solid var(--border);
+    color: var(--muted);
+    background: transparent;
+    font: inherit;
+    font-size: 18px;
+    line-height: 1;
+    cursor: grab;
+    touch-action: none;
+}
+
+.erp-dayplanner .dayplanner-drag-handle:active {
+    cursor: grabbing;
+}
+
+.erp-dayplanner .dayplanner-card-text {
+    min-width: 0;
+    padding: 10px;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    font-size: 15px;
+    line-height: 1.35;
+}
+
+.erp-dayplanner .dayplanner-card-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    min-height: 40px;
+    color: var(--success);
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.erp-dayplanner .dayplanner-empty {
+    margin-top: 10px;
+}
+
+.erp-dayplanner .dayplanner-editor {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding:
+        10px
+        max(10px, env(safe-area-inset-right))
+        10px
+        max(10px, env(safe-area-inset-left));
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+.erp-dayplanner .dayplanner-editor-label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 100%;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.erp-dayplanner .dayplanner-textarea {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 240px;
+    resize: vertical;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    color: var(--text);
+    background: var(--surface);
+    font: inherit;
+    font-size: 16px;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+.erp-dayplanner .dayplanner-textarea:focus {
+    border-color: var(--primary);
+    outline: 2px solid color-mix(
+        in srgb,
+        var(--primary) 20%,
+        transparent
+    );
+}
+
+.erp-dayplanner .dayplanner-draft-note {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.erp-dayplanner .dayplanner-footer {
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: stretch;
+    padding:
+        9px
+        max(10px, env(safe-area-inset-right))
+        max(9px, env(safe-area-inset-bottom))
+        max(10px, env(safe-area-inset-left));
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.erp-dayplanner .dayplanner-mode-button {
+    width: 100%;
+    min-height: 44px;
+    font-size: 16px;
+}
+
+@media (min-width: 640px) {
+    .erp-dayplanner .dayplanner-view,
+    .erp-dayplanner .dayplanner-editor {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    .erp-dayplanner .dayplanner-list,
+    .erp-dayplanner .dayplanner-editor-label {
+        width: 100%;
+        max-width: 820px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .erp-dayplanner .dayplanner-footer {
+        justify-content: center;
+    }
+
+    .erp-dayplanner .dayplanner-mode-button {
+        width: min(100%, 820px);
+    }
+}
+
+@media (max-width: 420px) {
+    .erp-dayplanner .dayplanner-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .erp-dayplanner .dayplanner-date-field {
+        justify-content: space-between;
+    }
+
+    .erp-dayplanner .dayplanner-date {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .erp-dayplanner .dayplanner-sync-status {
+        min-height: 16px;
+        text-align: left;
+    }
+}

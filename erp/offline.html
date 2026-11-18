@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1,viewport-fit=cover"
+    >
+
+    <meta name="theme-color" content="#263238">
+
+    <title>ERP — автономный режим</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui, sans-serif;
+        }
+
+        .offline-start {
+            padding: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="offline-start">
+            Загрузка сохранённого приложения…
+        </div>
+    </div>
+
+    <script id="erp-bootstrap" type="application/json">
+        {"offlineShell":true}
+    </script>
+
+    <script>
+        /*
+         * Только адрес сохранённого app.js.
+         * Сам контекст пользователя хранится в IndexedDB.
+         */
+        try {
+            const key =
+                'erp-offline-loader:' +
+                new URL('./', location.href).pathname;
+
+            const raw = localStorage.getItem(key);
+            const loader = raw ? JSON.parse(raw) : null;
+
+            if (!loader?.scriptUrl || !loader?.cssUrl) {
+                throw new Error(
+                    'Сначала откройте ERP с подключением к серверу.'
+                );
+            }
+
+            const scriptUrl = new URL(
+                loader.scriptUrl,
+                location.href
+            );
+
+            const cssUrl = new URL(
+                loader.cssUrl,
+                location.href
+            );
+
+            if (
+                scriptUrl.origin !== location.origin ||
+                cssUrl.origin !== location.origin
+            ) {
+                throw new Error(
+                    'Некорректные адреса автономного приложения.'
+                );
+            }
+
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = cssUrl.href;
+            document.head.appendChild(link);
+
+            const script = document.createElement('script');
+            script.type = 'module';
+            script.src = scriptUrl.href;
+
+            script.onerror = () => {
+                document.getElementById('app').textContent =
+                    'Файлы приложения недоступны. ' +
+                    'Откройте ERP с подключением к серверу.';
+            };
+
+            document.body.appendChild(script);
+        } catch (error) {
+            document.getElementById('app').textContent =
+                error.message || 'Автономный запуск недоступен.';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,464 @@
+:root {
+    color-scheme: light;
+    --header-height: 42px;
+    --tabs-height: 38px;
+    --background: #f4f7fb;
+    --surface: #fff;
+    --border: #d1d5db;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --primary: #2563eb;
+    --danger: #dc2626;
+    --success: #16a34a;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    overflow: hidden;
+    color: var(--text);
+    font: 14px/1.4 system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    background: var(--background);
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: default;
+    opacity: 0.6;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+.erp-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.erp-header {
+    display: flex;
+    flex: 0 0 calc(var(--header-height) + env(safe-area-inset-top));
+    align-items: center;
+    gap: 24px;
+    min-width: 0;
+    padding:
+        env(safe-area-inset-top)
+        max(24px, env(safe-area-inset-right))
+        0
+        max(24px, env(safe-area-inset-left));
+    color: #fff;
+    background: linear-gradient(180deg, #1c2734 0%, #202b38 100%);
+}
+
+.erp-header-title {
+    flex: 0 0 auto;
+    margin-right: 20px;
+    font-size: 18px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.module-tabs {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+}
+
+.module-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.module-tab {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--tabs-height);
+    padding: 0 16px;
+    color: #e5e7eb;
+    white-space: nowrap;
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+}
+
+.module-tab:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.09);
+}
+
+.module-tab.selected {
+    color: #fff;
+    font-weight: 700;
+    background: #30445d;
+}
+
+.module-tab:focus-visible,
+.erp-header-user a:focus-visible {
+    outline: 2px solid #93c5fd;
+    outline-offset: 2px;
+}
+
+.erp-header-user {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.erp-header-username {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.erp-header-user a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 0 13px;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid #344457;
+    border-radius: 8px;
+}
+
+.erp-header-user a:hover {
+    background: rgba(255, 255, 255, 0.09);
+}
+
+.module-panel {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+}
+
+.loading,
+.error-box,
+.empty-box {
+    margin: 16px;
+    padding: 16px;
+    background: var(--surface);
+    border-radius: 8px;
+}
+
+.error-box {
+    color: var(--danger);
+    border: 1px solid #fecaca;
+}
+
+.primary-button,
+.danger-button,
+.secondary-button {
+    min-height: 38px;
+    padding: 8px 14px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+}
+
+.primary-button {
+    flex: 1;
+    color: #fff;
+    background: var(--primary);
+}
+
+.danger-button {
+    color: #fff;
+    background: var(--danger);
+}
+
+.secondary-button {
+    color: var(--text);
+    background: #f3f4f6;
+    border-color: var(--border);
+}
+
+.login-page {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    place-items: center;
+}
+
+.login-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: min(360px, 100%);
+    padding: 24px;
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+}
+
+.login-card h1 {
+    margin: 0 0 8px;
+    text-align: center;
+}
+
+.login-card label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-weight: 600;
+}
+
+.login-card input {
+    width: 100%;
+    min-height: 42px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+}
+
+.password-field {
+    display: flex;
+}
+
+.password-field input {
+    border-radius: 7px 0 0 7px;
+}
+
+.password-field button {
+    width: 44px;
+    border: 1px solid var(--border);
+    border-left: 0;
+    border-radius: 0 7px 7px 0;
+}
+
+.form-message {
+    min-height: 20px;
+    color: var(--danger);
+    text-align: center;
+}
+
+.erp-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding:
+        max(12px, env(safe-area-inset-top))
+        max(12px, env(safe-area-inset-right))
+        max(12px, env(safe-area-inset-bottom))
+        max(12px, env(safe-area-inset-left));
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.erp-modal.open {
+    display: flex;
+}
+
+.erp-modal-card {
+    display: flex;
+    flex-direction: column;
+    width: min(680px, 100%);
+    max-height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.erp-modal-header,
+.erp-modal-footer {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background: #f9fafb;
+}
+
+.erp-modal-header {
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+}
+
+.erp-modal-footer {
+    justify-content: flex-end;
+    border-top: 1px solid var(--border);
+}
+
+.erp-modal-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 12px;
+    overflow-y: auto;
+}
+
+.erp-modal-close {
+    padding: 4px 8px;
+    font-size: 20px;
+    background: transparent;
+    border: 0;
+}
+
+.erp-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.erp-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.erp-field.full {
+    grid-column: 1 / -1;
+}
+
+.erp-field input,
+.erp-field select,
+.erp-field textarea {
+    width: 100%;
+    min-height: 38px;
+    padding: 7px 9px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+.erp-field textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+@media (max-width: 900px) {
+    .erp-header {
+        gap: 12px;
+        padding-right: max(12px, env(safe-area-inset-right));
+        padding-left: max(12px, env(safe-area-inset-left));
+    }
+
+    .erp-header-title {
+        margin-right: 0;
+    }
+
+    .module-tab {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    :root {
+        --header-height: 54px;
+        --tabs-height: 40px;
+    }
+
+    body {
+        font-size: 14px;
+    }
+
+    .erp-header {
+        gap: 8px;
+    }
+
+    .erp-header-title {
+        font-size: 15px;
+    }
+
+    .module-tabs {
+        gap: 2px;
+    }
+
+    .module-tab {
+        padding-right: 10px;
+        padding-left: 10px;
+        font-size: 13px;
+    }
+
+    .erp-header-user {
+        gap: 8px;
+    }
+
+    .erp-header-username {
+        display: none;
+    }
+
+    .erp-header-user a {
+        min-height: 34px;
+        padding: 0 9px;
+        font-size: 12px;
+    }
+
+    .erp-modal {
+        align-items: stretch;
+        padding:
+            env(safe-area-inset-top)
+            env(safe-area-inset-right)
+            env(safe-area-inset-bottom)
+            env(safe-area-inset-left);
+    }
+
+    .erp-modal-card {
+        width: 100%;
+        height: 100%;
+        max-height: none;
+        border-radius: 0;
+    }
+
+    .erp-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .erp-field.full {
+        grid-column: auto;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 16px;
+    }
+}
+
+
+    .erp-shell > .erp-header:has(
+        #module-tabs > .module-tab:only-child
+    ) {
+        display: none !important;
+    }
